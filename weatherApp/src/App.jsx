@@ -22,6 +22,16 @@ const App = () => {
     }
   };
 
+  const handleSaveToMongoDB = async () => {
+    try {
+      await axios.post('http://localhost:5000/save-weather', weatherData);
+      alert('Weather data saved to MongoDB successfully!');
+    } catch (error) {
+      console.error('Error saving weather data to MongoDB:', error);
+      alert('Error saving weather data to MongoDB. Please try again.');
+    }
+  };
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
@@ -58,6 +68,7 @@ const App = () => {
               <p><strong>Timezone:</strong> {weatherData.timezone / 3600} hrs</p>
             </div>
           </div>
+          <button onClick={handleSaveToMongoDB}>Save Data</button>
         </div>
       )}
     </div>
